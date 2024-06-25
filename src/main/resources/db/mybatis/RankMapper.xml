@@ -9,8 +9,8 @@
             (SELECT `goods_id`, SUM(`price` * `quantity`) AS `total_price`
             FROM `order`
             GROUP BY `goods_id`) t
-        INNER JOIN `goods` ON `goods`.id = t.goods_id
-        ORDER BY t.total_price DESC ;
+        RIGHT JOIN `goods` ON `goods`.id = t.goods_id
+        ORDER BY t.total_price DESC;
     </select>
     <resultMap id="GoodsSalesRankItem" type="GoodsSalesRankItem">
         <result property="totalPrice" column="total_price"/>
