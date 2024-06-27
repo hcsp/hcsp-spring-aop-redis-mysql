@@ -1,6 +1,8 @@
 package com.github.hcsp.entities;
 
-public class Goods {
+import java.io.Serializable;
+
+public class Goods implements Serializable {
     private long id;
     private String name;
 
