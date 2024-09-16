@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MyMapper">
+
+    <select id="selectSingLe" resultMap="recordItem">
+        SELECT
+        SUM(`order`.price * `order`.quantity) as total,
+        goods.id as goods_id,
+        goods.name as goods_name
+        FROM `order`
+        LEFT JOIN goods
+        ON `order`.goods_id = goods.id
+        GROUP BY `order`.goods_id
+        ORDER BY total DESC
+    </select>
+
+    <resultMap id="recordItem" type="com.github.hcsp.entity.RecordItem" >
+        <result property="price" column="total" />
+        <association property="goods">
+            <result property="id" column="goods_id" />
+            <result property="name" column="goods_name" />
+        </association>
+    </resultMap>
+</mapper>
